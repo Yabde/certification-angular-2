@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TriviaCategory} from "../../../shared/models/domain/interfaces/trivia-category";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {TriviaCategoryApiResponse} from "../../../shared/models/api/trivia-category-api-response";
 import {TriviaQuestionApiResponse} from "../../../shared/models/api/trivia-question-api-response";
 import {DifficultyType} from "../../../shared/models/domain/types/difficulty.type";
@@ -42,7 +42,6 @@ export class QuizService {
       type: 'multiple'
     }
     return this.httpService.get<TriviaQuestionApiResponse>(url, { params: params }).pipe(
-      tap(data => console.log(data)),
       map((data: TriviaQuestionApiResponse) => {
         let triviaQuestions = data.results;
         for (let q of triviaQuestions) {
