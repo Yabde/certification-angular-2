@@ -1,5 +1,5 @@
-import {TypeQuestion} from "./type-question.type";
-import {DifficultyType} from "./difficulty.type";
+import {TypeQuestion} from "../types/type-question.type";
+import {DifficultyType} from "../types/difficulty.type";
 
 export interface TriviaQuestion {
   category: string;

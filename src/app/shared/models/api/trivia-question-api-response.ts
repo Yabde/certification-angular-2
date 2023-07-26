@@ -1,4 +1,4 @@
-import {TriviaQuestion} from "./trivia-question";
+import {TriviaQuestion} from "../domain/interfaces/trivia-question";
 
 export interface TriviaQuestionApiResponse {
   response_code: number;

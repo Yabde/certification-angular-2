@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormQuizzValue} from "../../../shared/models/form-quizz-value";
+import {FormQuizzValue} from "../../../shared/models/domain/interfaces/form-quizz-value";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {QuizService} from "../services/quiz.service";

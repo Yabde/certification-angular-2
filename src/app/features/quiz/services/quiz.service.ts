@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {TriviaCategory} from "../../../shared/models/trivia-category";
+import {TriviaCategory} from "../../../shared/models/domain/interfaces/trivia-category";
 import {map, Observable, tap} from "rxjs";
-import {TriviaCategoryApiResponse} from "../../../shared/models/trivia-category-api-response";
-import {TriviaQuestionApiResponse} from "../../../shared/models/trivia-question-api-response";
-import {DifficultyType} from "../../../shared/models/difficulty.type";
+import {TriviaCategoryApiResponse} from "../../../shared/models/api/trivia-category-api-response";
+import {TriviaQuestionApiResponse} from "../../../shared/models/api/trivia-question-api-response";
+import {DifficultyType} from "../../../shared/models/domain/types/difficulty.type";
 import {hasOneChoiceSelectedValidator} from "../../../shared/validators/quiz-one-choice-selected-validator";
 import {FormArray, FormBuilder} from "@angular/forms";
-import {TriviaQuestion} from "../../../shared/models/trivia-question";
-import {FormQuizzQuestionValue} from "../../../shared/models/form-quizz-value";
-import {shuffle} from "../../../shared/utils";
+import {TriviaQuestion} from "../../../shared/models/domain/interfaces/trivia-question";
+import {FormQuizzQuestionValue} from "../../../shared/models/domain/interfaces/form-quizz-value";
+import {shuffle} from "../../../shared/utils/utils";
 
 @Injectable()
 export class QuizService {

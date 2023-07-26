@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizService} from "../services/quiz.service";
 import {take} from "rxjs";
-import {TriviaCategory} from "../../../shared/models/trivia-category";
-import {TriviaQuestion} from "../../../shared/models/trivia-question";
-import {DifficultyType} from "../../../shared/models/difficulty.type";
+import {TriviaCategory} from "../../../shared/models/domain/interfaces/trivia-category";
+import {TriviaQuestion} from "../../../shared/models/domain/interfaces/trivia-question";
+import {DifficultyType} from "../../../shared/models/domain/types/difficulty.type";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {FormQuizzValue} from "../../../shared/models/form-quizz-value";
+import {FormQuizzValue} from "../../../shared/models/domain/interfaces/form-quizz-value";
 import {hasOneChoiceSelectedValidator} from "../../../shared/validators/quiz-one-choice-selected-validator";
 
 @Component({
