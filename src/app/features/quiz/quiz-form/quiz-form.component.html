@@ -5,85 +5,20 @@
     </div>
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="getQuestions()">
-    <div class="row justify-content-center py-3">
-      <div class="col-11 p-0">
-        <!--TODO : sortir dans un composant avec 2 way-->
-        <!-- makerFormComponent-->
-        <div class="input-group">
-          <select class="form-select"
-                  id="categorySelect"
-                  [formControlName]="'category'">
-            <option disabled hidden selected value="">Select a category</option>
-            <option value="">Select a category</option>
-
-            <option *ngFor="let category of triviaCategories"
-                    [ngValue]="category.id"
-            >{{category.name}}</option>
-          </select>
-
-          <select class="form-select"
-                  id="difficultySelect"
-                  [formControlName]="'difficulty'">
-            <option disabled hidden selected value="">Select a difficulty</option>
-            <option value="">Select a difficulty</option>
-
-            <option *ngFor="let difficulty of triviaDifficulties"
-                    [ngValue]="difficulty"
-            >{{difficulty}}</option>
-          </select>
-
-          <button type="submit"
-                  class="btn btn-outline-secondary"
-                  id="createBtn"
-          >Create</button>
-        </div>
-      </div>
+  <div class="row justify-content-center py-3">
+    <div class="col-11 p-0">
+      <app-quiz-select-form
+       [triviaCategories]="triviaCategories"
+       [triviaDifficulties]="triviaDifficulties"
+       (submitFormEmitter)="getQuestions($event)">
+      </app-quiz-select-form>
     </div>
-  </form>
+  </div>
 
   <ng-container *ngIf="triviaQuestions && triviaQuestions.length > 0">
-    <!--TODO : sortir dans un composant avec 2 way-->
-    <!-- responsesFormComponent-->
-    <form [formGroup]="formQuiz" (ngSubmit)="onSubmitQuizResponses()">
-      <div class="row justify-content-center py-3" formArrayName="questions">
-        <div *ngFor="let qArrayControls of questions.controls; let qArrayIndex=index"
-             class="col-11"
-             [formGroupName]="qArrayIndex">
-
-          <div class="row">
-            <div class="row">
-              <div class="col">
-                <p>{{ qArrayControls.value['question'] | htmlSanitized }}</p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col" *ngFor="let choice of choices(qArrayControls); let choiceIndex=index">
-
-                <input type="radio"
-                       class="btn-check"
-                       [id]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
-                       formControlName="selectedChoice"
-                       [value]="choice"
-                >
-                <label class="btn btn-outline-success"
-                       [for]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
-                >{{ choice | htmlSanitized }}</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <ng-container *ngIf="this.formQuiz.valid">
-        <div class="row py-5 justify-content-center">
-          <div class="col-10 d-grid gap-2">
-            <button class="btn btn-secondary">Submit</button>
-          </div>
-        </div>
-      </ng-container>
-
-    </form>
+    <app-quiz-responses-select-form
+      [triviaQuestions]="triviaQuestions"
+      (submitFormEmitter)="onSubmitQuizResponses($event)"
+    ></app-quiz-responses-select-form>
   </ng-container>
 </div>

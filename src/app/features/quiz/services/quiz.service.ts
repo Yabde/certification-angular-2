@@ -8,7 +8,7 @@ import {DifficultyType} from "../../../shared/models/domain/types/difficulty.typ
 import {hasOneChoiceSelectedValidator} from "../../../shared/validators/quiz-one-choice-selected-validator";
 import {FormArray, FormBuilder} from "@angular/forms";
 import {TriviaQuestion} from "../../../shared/models/domain/interfaces/trivia-question";
-import {FormQuizzQuestionValue} from "../../../shared/models/domain/interfaces/form-quizz-value";
+import {FormQuizQuestionValue} from "../../../shared/models/domain/interfaces/form-quiz-value";
 import {shuffle} from "../../../shared/utils/utils";
 
 @Injectable()
@@ -37,8 +37,8 @@ export class QuizService {
     const url = this.API_URL + this.QUESTIONS_ENDPOINT;
     const params = {
       amount: 5,
-      category: 11,
-      difficulty: 'easy',
+      category: category,
+      difficulty: difficulty,
       type: 'multiple'
     }
     return this.httpService.get<TriviaQuestionApiResponse>(url, { params: params }).pipe(
@@ -78,7 +78,7 @@ export class QuizService {
     formArray.push(questionChoicesGroup);
   }
 
-  rebuildFormFromValue(formArray: FormArray, questionValue: FormQuizzQuestionValue[], disabled = false) {
+  rebuildFormFromValue(formArray: FormArray, questionValue: FormQuizQuestionValue[], disabled = false) {
     questionValue.forEach(questionValue => {
       let choices = this.shuffleArray(questionValue.choices);
 

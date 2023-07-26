@@ -6,45 +6,14 @@
       </div>
     </div>
 
-
-
-    <form [formGroup]="formQuizzSubmitted">
-      <div class="row justify-content-center py-3" formArrayName="questions">
-        <div *ngFor="let qArrayControls of questions.controls; let qArrayIndex=index"
-             class="col-11"
-             [formGroupName]="qArrayIndex">
-
-          <div class="row">
-            <div class="row">
-              <div class="col">
-                <p>{{ qArrayControls.value['question'] | htmlSanitized }}</p>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col" *ngFor="let choice of choices(qArrayControls); let choiceIndex=index">
-
-                <input type="radio"
-                       class="btn-check"
-                       [id]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
-                       formControlName="selectedChoice"
-                       [value]="choice"
-                >
-                <label class="btn btn-outline-success"
-                       [ngClass]="{
-                       'btn-error-custom': choice !== correctAnswer(qArrayControls)
-                                          && !(selectedChoice(qArrayControls) === correctAnswer(qArrayControls))
-                                          && choice === selectedChoice(qArrayControls),
-                       'btn-success-custom': choice === correctAnswer(qArrayControls)
-                       }"
-                       [for]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
-                >{{ choice | htmlSanitized }}</label>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="row justify-content-center py-3">
+      <div class="col-11 p-0">
+        <app-quiz-responses-select-form
+          [formDesactivated]="true"
+          [formQuizQuestionValue]="formQuizzValueSubmitted">
+        </app-quiz-responses-select-form>
       </div>
-    </form>
+    </div>
 
     <div class="row py-3 justify-content-center text-center">
       <div class="col-5">

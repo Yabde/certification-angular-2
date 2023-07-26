@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormQuizzValue} from "../../../shared/models/domain/interfaces/form-quizz-value";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {FormQuizValue} from "../../../shared/models/domain/interfaces/form-quiz-value";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {QuizService} from "../services/quiz.service";
 
@@ -12,7 +12,7 @@ import {QuizService} from "../services/quiz.service";
 export class QuizResultsComponent implements OnInit{
 
   formQuizzSubmitted!: FormGroup;
-  formQuizzValueSubmitted: FormQuizzValue;
+  formQuizzValueSubmitted: FormQuizValue;
   correctResponse = 0;
   totalResponse = 0;
 
@@ -28,32 +28,6 @@ export class QuizResultsComponent implements OnInit{
     this.formQuizzSubmitted = this.fb.group({
       questions: this.fb.array([])
     })
-
-    this.buildForm();
-  }
-
-  get questions(): FormArray<FormGroup> {
-    return this.formQuizzSubmitted.get('questions') as FormArray<FormGroup>;
-  }
-
-  choices(formGroup: FormGroup): string[] {
-    return formGroup.get('choices')?.value;
-  }
-
-  correctAnswer(formGroup: FormGroup): string {
-    return formGroup.get('correctAnswer')?.value;
-  }
-
-  selectedChoice(formGroup: FormGroup): string {
-    return formGroup.get('selectedChoice')?.value;
-  }
-
-  buildForm(): void {
-    if (this.formQuizzValueSubmitted) {
-      this.quizService.rebuildFormFromValue(this.questions, this.formQuizzValueSubmitted.questions, true);
-    }
-
-    this.computeScore();
   }
 
   computeScore() {

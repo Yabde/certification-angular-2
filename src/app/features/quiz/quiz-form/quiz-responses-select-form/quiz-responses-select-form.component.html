@@ -1,0 +1,41 @@
+<form [formGroup]="formQuiz" (ngSubmit)="onSubmitQuizResponses()">
+  <div class="row justify-content-center py-3" formArrayName="questions">
+    <div *ngFor="let qArrayControls of questions.controls; let qArrayIndex=index"
+         class="col-11"
+         [formGroupName]="qArrayIndex">
+
+      <div class="row">
+        <div class="row">
+          <div class="col">
+            <p>{{ qArrayControls.value['question'] | htmlSanitized }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col" *ngFor="let choice of choices(qArrayControls); let choiceIndex=index">
+
+            <input type="radio"
+                   class="btn-check"
+                   [id]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
+                   formControlName="selectedChoice"
+                   [value]="choice"
+            >
+            <label class="btn btn-outline-success"
+                   [ngClass]="getButtonCssClass(choice, correctAnswer(qArrayControls), selectedChoice(qArrayControls))"
+                   [for]="'success-outlined-' + qArrayIndex + '-' + choiceIndex"
+            >{{ choice | htmlSanitized }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="this.formQuiz.valid && !this.formDesactivated">
+    <div class="row py-5 justify-content-center">
+      <div class="col-10 d-grid gap-2">
+        <button class="btn btn-secondary">Submit</button>
+      </div>
+    </div>
+  </ng-container>
+
+</form>

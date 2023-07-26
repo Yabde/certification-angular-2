@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="input-group">
+    <select class="form-select"
+            id="categorySelect"
+            [formControlName]="'category'">
+      <option disabled hidden selected value="">Select a category</option>
+      <option value="">Select a category</option>
+
+      <option *ngFor="let category of triviaCategories"
+              [ngValue]="category.id"
+      >{{category.name}}</option>
+    </select>
+
+    <select class="form-select"
+            id="difficultySelect"
+            [formControlName]="'difficulty'">
+      <option disabled hidden selected value="">Select a difficulty</option>
+      <option value="">Select a difficulty</option>
+
+      <option *ngFor="let difficulty of triviaDifficulties"
+              [ngValue]="difficulty"
+      >{{difficulty}}</option>
+    </select>
+
+    <button type="submit"
+            class="btn btn-outline-secondary"
+            id="createBtn"
+    >Create</button>
+  </div>
+</form>
