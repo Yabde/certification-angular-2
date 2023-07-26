@@ -11,7 +11,6 @@ import {QuizService} from "../services/quiz.service";
 })
 export class QuizResultsComponent implements OnInit{
 
-  formQuizzSubmitted!: FormGroup;
   formQuizzValueSubmitted: FormQuizValue;
   correctResponse = 0;
   totalResponse = 0;
@@ -24,18 +23,17 @@ export class QuizResultsComponent implements OnInit{
 
   ngOnInit(): void {
     this.redirectIfNoData();
-
-    this.formQuizzSubmitted = this.fb.group({
-      questions: this.fb.array([])
-    })
+    this.computeScore();
   }
 
   computeScore() {
-    this.totalResponse = this.formQuizzValueSubmitted.questions.length;
-    this.correctResponse = this.formQuizzValueSubmitted.questions
-      .map(value => value.selectedChoice === value.correctAnswer)
-      .filter(value => value)
-      .length;
+    if (this.formQuizzValueSubmitted) {
+      this.totalResponse = this.formQuizzValueSubmitted.questions.length;
+      this.correctResponse = this.formQuizzValueSubmitted.questions
+        .map(value => value.selectedChoice === value.correctAnswer)
+        .filter(value => value)
+        .length;
+    }
   }
 
   redirectToQuizPage(): void {
