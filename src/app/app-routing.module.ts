@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AppComponent,
     children: [
       { path: 'quiz', loadChildren: () => import('./features/quiz/quiz.module').then(m => m.QuizModule) },
-      // { path: '**', redirectTo: 'quiz' },
+      { path: '**', redirectTo: 'quiz' },
     ]
   },
 ];
